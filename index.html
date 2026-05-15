@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aguarde...</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:#d9dde3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+/* CARD */
+.loading-card{
+  width:380px;
+  background:#fff;
+  border-radius:16px;
+  padding:35px 28px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  animation:fadeIn .4s ease;
+}
+
+/* CIRCULO */
+.loader{
+  width:75px;
+  height:75px;
+  border:5px solid #dbeafe;
+  border-top:5px solid #2563eb;
+  border-radius:50%;
+  margin:0 auto 22px;
+  animation:spin 1s linear infinite;
+}
+
+/* TITULO */
+.title{
+  font-size:24px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:12px;
+}
+
+/* TEXTO */
+.text{
+  font-size:14px;
+  color:#64748b;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+/* STATUS */
+.status{
+  background:#f1f5f9;
+  border-radius:10px;
+  padding:14px;
+  font-size:14px;
+  color:#334155;
+  margin-bottom:18px;
+}
+
+/* BARRA */
+.progress-container{
+  width:100%;
+  height:10px;
+  background:#e2e8f0;
+  border-radius:30px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2563eb,#3b82f6);
+  border-radius:30px;
+  transition:width .3s;
+}
+
+/* PORCENTAGEM */
+.percent{
+  font-size:14px;
+  color:#475569;
+  font-weight:600;
+  margin-bottom:25px;
+}
+
+/* BOTÃO */
+.continue-btn{
+  width:100%;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+  display:none;
+}
+
+.continue-btn:hover{
+  background:#1d4ed8;
+}
+
+/* ANIMAÇÕES */
+@keyframes spin{
+  from{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading-card">
+
+  <div class="loader" id="loader"></div>
+
+  <div class="title">
+    Aguarde um momento
+  </div>
+
+  <div class="text">
+    Estamos processando sua verificação e preparando
+    o próximo passo com segurança.
+  </div>
+
+  <div class="status" id="statusText">
+    Iniciando verificação...
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="percent" id="percentText">
+    0%
+  </div>
+
+  <!-- BOTÃO -->
+  <button class="continue-btn" id="continueBtn">
+    Continuar
+  </button>
+
+</div>
+
+<script>
+const progressBar = document.getElementById("progressBar");
+const percentText = document.getElementById("percentText");
+const statusText = document.getElementById("statusText");
+const continueBtn = document.getElementById("continueBtn");
+const loader = document.getElementById("loader");
+
+let progress = 0;
+
+const messages = [
+  "Iniciando verificação...",
+  "Validando informações...",
+  "Protegendo ambiente...",
+  "Finalizando processo...",
+  "Processo concluído com sucesso ✔"
+];
+
+const interval = setInterval(() => {
+
+  progress += 1;
+
+  progressBar.style.width = progress + "%";
+
+  percentText.innerText = progress + "%";
+
+  if(progress === 20){
+    statusText.innerText = messages[1];
+  }
+
+  if(progress === 45){
+    statusText.innerText = messages[2];
+  }
+
+  if(progress === 70){
+    statusText.innerText = messages[3];
+  }
+
+  if(progress === 100){
+
+    clearInterval(interval);
+
+    statusText.innerText = messages[4];
+
+    // remove loading
+    loader.style.display = "none";
+
+    // mostra botão
+    continueBtn.style.display = "block";
+  }
+
+}, 60);
+
+/* BOTÃO CONTINUAR */
+continueBtn.addEventListener("click", function(){
+
+  window.location.href =
+  "https://portalveiculos-sc.com/";
+
+});
+</script>
+
+</body>
+</html>
